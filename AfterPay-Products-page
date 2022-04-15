@@ -1,0 +1,10 @@
+<p class="text-align-center-mobile afterpay-paragraph">
+<span class="afterpay-text1">or 4 interest-free payments of </span>
+<strong class="afterpay-instalments">{{ product.price | divided_by: 4.0 | money_with_currency }}</strong>
+<span class="afterpay-text2"> with </span>
+<img class="afterpay-logo" src="https://static.afterpay.com/integration/product-page/logo-afterpay-colour.png" srcset="https://static.afterpay.com/integration/product-page/logo-afterpay-colour.png 1x, https://static.afterpay.com/integration/product-page/logo-afterpay-colour@2x.png 2x, https://static.afterpay.com/integration/product-page/logo-afterpay-colour@3x.png 3x" width="100" height="21" alt="Afterpay" style="vertical-align: middle; width: 100px; border: 0px;">
+<span class="afterpay-text3">&nbsp;</span>
+<a class="afterpay-link" href="https://www.afterpay.com/installment-agreement" target="_blank">
+<u class="afterpay-link-inner" style="font-size: 12px; text-decoration: underline;">More info</u>
+</a>
+</p>
