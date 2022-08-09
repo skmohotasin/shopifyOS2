@@ -34,7 +34,7 @@ function callapi(api) {
                 } else {
                     setCookie('GoogleLLCFound', false, 7);
                     if(country == 'US' || country == 'CA'){
-                      window.location.href = 'https://us.helloperiod.com/';
+                      window.location.href = 'Target location';
                     }
                 }
             });
@@ -54,6 +54,6 @@ if (Getcountry == null && !Ifcalled) {
 }
 else {
   if (Getcountry == 'US' || Getcountry == 'CA') {
-    window.location.href = 'https://us.helloperiod.com/';
+    window.location.href = 'Target location';
   }
 }
