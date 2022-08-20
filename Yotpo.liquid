@@ -5,10 +5,10 @@ window.addEventListener('DOMContentLoaded', function() {
   if(typeof(Yotpo) != 'undefined' && Yotpo != null){  
     setTimeout(function(){
       let noscript = document.createElement('noscript');
-      let content = '<link rel="stylesheet" href="https://staticw2.yotpo.com/dzsRkNy8zD66S9BEY8j4aIysd1QnUz1ym5iIpDgD/widget.css">';
+      let content = '<link rel="stylesheet" href="https://staticw2.yotpo.com/{ID}/widget.css">';
       let mainContent = document.createElement('link');
       mainContent.rel = "preload";
-      mainContent.setAttribute("href", "https://staticw2.yotpo.com/dzsRkNy8zD66S9BEY8j4aIysd1QnUz1ym5iIpDgD/widget.css");
+      mainContent.setAttribute("href", "https://staticw2.yotpo.com/{ID}/widget.css");
       mainContent.as = "style";
       mainContent.setAttribute("onload", "this.onload=null;this.rel='stylesheet'");
       document.querySelector('head').append(mainContent);
@@ -16,7 +16,7 @@ window.addEventListener('DOMContentLoaded', function() {
       noscript.append(content);
     },2400); 
     setTimeout(function(){
-      (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/dzsRkNy8zD66S9BEY8j4aIysd1QnUz1ym5iIpDgD/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+      (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/{ID}/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
       for (let i = 0;Yotpo.length > i; i++) {
         Yotpo[i].style.opacity = 1;
         Yotpo[i].style.visibility = 'visible';
