@@ -1,0 +1,41 @@
+{% style %}
+  #shopify-section-{{ section.id }} .collection__description {
+     text-align: justify;
+  }
+  #shopify-section-{{ section.id }} [data-description-text='less'] {
+    overflow: hidden;
+     text-overflow: ellipsis;
+     display: -webkit-box;
+     -webkit-line-clamp: 2;
+             line-clamp: 2; 
+     -webkit-box-orient: vertical;
+  }
+  #shopify-section-{{ section.id }} [data-description-text] {
+    width: calc(100% - 40px);
+  }
+  #shopify-section-{{ section.id }} [data-show] {
+    justify-content: flex-end;
+    position: relative;
+    right: 0;
+    bottom: 20px;
+  }
+  %}
+
+<div class="collection__description three-fifths medium-down--one-whole column" data-description>
+      <span data-description-text="less">{{ collection.description }}</span>
+      <span data-show>More</span>
+    </div>
+<script>
+let DescriptionText = document.querySelector('[data-description]').children[0];
+let ChildBtn = document.querySelector('[data-description]').children[1];
+  ChildBtn.addEventListener("click", function() {
+    if(DescriptionText.dataset.descriptionText == 'less'){
+      DescriptionText.dataset.descriptionText = 'more'
+      ChildBtn.innerHTML = 'Less'
+    }
+    else {
+      DescriptionText.dataset.descriptionText = 'less'
+      ChildBtn.innerHTML = 'More'
+    }
+  });
+</script>
