@@ -1,0 +1,62 @@
+    "logo-list": {
+      "name": "Logo list",
+      "settings": {
+        "layout": {
+          "label": "Layout",
+          "options__1": {
+            "label": "No container"
+          },
+          "options__2": {
+            "label": "Row container"
+          },
+          "options__3": {
+            "label": "Section container"
+          }
+        },
+        "title": {
+          "label": "Heading"
+        },
+        "auto_rotate": {
+          "label": "Enable auto rotate"
+        },
+        "rewind": {
+          "label": "Enable rewind"
+        },
+        "pauseOnHover": {
+          "label": "Enable pause On Hover"
+        },
+        "pauseOnFocus": {
+          "label": "Enable pause On Focus"
+        },
+        "change_slides_speed": {
+          "label": "Change slides speed",
+          "info": "Positive means right to left and negative means left to right [Learn more](https:\/\/splidejs.com\/extensions\/auto-scroll\/#pauseonhover)"
+        },
+        "number_slide_desktop": {
+          "label": "Number slides on desktop"
+        },
+        "number_slide_mobile": {
+          "label": "Number slides on mobile"
+        }
+      },
+      "blocks": {
+        "logo": {
+          "name": "Logo",
+          "settings": {
+            "image": {
+              "label": "Image",
+              "info": "Add alt text for better SEO with 'Edit' button above"
+            },
+            "link": {
+              "label": "Link",
+              "info": "Optional"
+            }
+          }
+        }
+      },
+      "presets": {
+        "logo_list": {
+          "name": "Logo list"
+        }
+      }
+    },
