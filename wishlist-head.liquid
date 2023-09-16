@@ -1,0 +1,47 @@
+<style>
+  .swym-wishlist,.wishlist-btn{opacity:0;visibility:hidden}
+</style>
+<script>
+  window.addEventListener('DOMContentLoaded', function() {
+  function cartCountUpdate(value){
+    const cartCount = document.querySelector('.cart-link__bubble-num');
+    cartCount.innerText = value;
+    cartCount.parentNode.classList.add('cart-link__bubble--visible');
+  }
+  function wishlistICon(){
+      const wishlistIConBtn = document.querySelector('.swym-wishlist')?document.querySelector('.swym-wishlist'):null;
+      if(wishlistIConBtn != null){
+        wishlistIConBtn.style.opacity = 1;
+        wishlistIConBtn.style.visibility = 'visible';
+      }
+      const wishlistIcollectionBtn = document.querySelectorAll('.wishlist-btn')?document.querySelectorAll('.wishlist-btn'):null;
+      if(wishlistIcollectionBtn != null){
+        for (let i = 0; i < wishlistIcollectionBtn.length; i++) {
+          wishlistIcollectionBtn[i].style.opacity = 1;
+          wishlistIcollectionBtn[i].style.visibility = 'visible';
+        }
+      }
+
+      var windowCount = window.swymCart.item_count;
+      const swymPlugin = document.querySelector('#swym-plugin');
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.attributeName === 'class') {
+            const modalClass = mutation.target.className;
+            if (modalClass.indexOf('swym-notifications-container swymTopLeft') > -1) {
+              windowCount = window.swymCart.item_count;
+              cartCountUpdate(windowCount);
+            }
+          }
+        });
+      });
+      
+      observer.observe(swymPlugin, {attributes: true,subtree: true});
+    
+  }
+  if(!window.SwymCallbacks){
+    window.SwymCallbacks = [];
+  }
+  window.SwymCallbacks.push(wishlistICon);
+  });
+</script>
