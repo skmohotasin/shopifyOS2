@@ -1,0 +1,278 @@
+{%- paginate collections by 1000 -%}{%- assign NumberofPages = paginate.parts.size -%}{%- endpaginate -%}
+{%- capture alphabets -%}A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z{% endcapture %}
+{%- assign Arryalphabets = alphabets | split: "," -%}
+{%- style -%}
+.search-filter-brand-collection .search-container {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: var(--sectionHeaderBottom) 0
+}
+.search-filter-brand-collection .input-field {
+  display: block;
+  width: 100%;
+  text-align: center
+}
+
+.search-filter-brand-collection #search-brands {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px
+}
+.search-filter-brand-collection .alphabets {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center
+}
+.search-filter-brand-collection button.filter {
+    padding: 10px 15px;
+    margin: 6px;
+    border: none;
+    outline: 0;
+    cursor: pointer;
+    background: #efefef
+}
+  
+.search-filter-brand-collection button.filter.mixitup-control-active,
+.search-filter-brand-collection button.filter:hover,
+.search-filter-brand-collection button.filter:focus {
+    background: var(--colorBtnATC);
+    color: #fff;
+    border: none
+}
+.search-filter-brand-collection .alphabet-container {
+  width: 100%;
+  margin: 60px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center
+}
+.search-filter-brand-collection .alphabet-container .mix {
+  width: calc({{ 100 | divided_by: section.settings.group_cell | round: 2 | append: "%"}} - 20px);
+  margin: 10px;
+  height: 50px;
+  line-height: 50px;
+  box-shadow: 0 0 6px 0 #ccc;
+  position: relative
+}
+.search-filter-brand-collection .alphabet-container .mix a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: #000;
+  font-size: 18px;
+  text-transform: uppercase
+}
+.search-filter-brand-collection #noItemsFoundMessage {
+  display: none;
+  width: 100%;
+  color: var(--colorBtnATC);
+}  
+  
+@media only screen and (max-width:768px) {  
+  .search-filter-brand-collection .alphabets {
+    margin: 0 -5px;
+    justify-content: space-between;
+  }
+  .search-filter-brand-collection button.filter {
+    margin: 5px;
+  }
+  .search-filter-brand-collection .alphabet-container .mix {
+    margin: 5px;
+    height: 40px;
+    line-height: 40px;
+    width: calc(50% - 10px);
+  }
+  .search-filter-brand-collection .alphabet-container {
+    margin: 20px -5px;
+    width: calc(100% + 10px);
+  }
+  .search-filter-brand-collection .alphabet-container .mix a {
+    font-size: 12px;
+  }
+}
+
+{%- endstyle -%}
+{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+<div class="page-width">
+  {%- if section.settings.title != blank -%}
+    <div class="section-header text-{{ section.settings.heading_position }}">
+      <h2 class="section-header__title {{ section.settings.heading_size }}">{{ section.settings.title | escape }}</h2>
+    </div>
+  {%- endif -%}
+  <div
+      data-section-id="{{ section.id }}"
+      data-section-type="collection-by-brands-section"
+      data-immediate-load
+      data-number-of-pages="{{ NumberofPages }}"
+    >
+    <div class="search-filter-brand-collection">
+       <div class="search-container"  data-search-container>
+          <div class="input-field">
+            <input type="text" class="input" data-input-search placeholder="Search Brands" id="search-brands">
+          </div>
+          <div class="alphabets">
+               <button class="filter" data-filter="all">All</button>
+            {%- for alphabet in Arryalphabets -%}
+               <button class="filter" data-filter="{{ alphabet | downcase | prepend: "." }}">{{ alphabet }}</button>
+            {%- endfor -%}
+          </div>
+       </div>
+      <div class="alphabet-container" data-alphabet-container>
+        <div id="noItemsFoundMessage"><h2>{{ "general.search.no_item_found" | t }}</h2></div>
+      </div>
+    </div>
+  </div>
+</div>
+{%- if section.settings.divider -%}</div>{%- endif -%}
+
+<script src="{{ 'mixitup.min.js' | asset_url }}" defer></script>
+
+<script>
+window.addEventListener('DOMContentLoaded', function() { 
+function apicalled(){
+    var e, 
+    a = document.getElementById("noItemsFoundMessage"),
+    n = document.querySelector('[data-alphabet-container]'),
+    t = document.querySelector('[data-input-search]'),
+    i = mixitup(n, {
+        animation: {
+            duration: 350
+        },
+        callbacks: {
+            onMixClick: function () {
+                this.matches("[data-filter]") && (t.value = "")
+            },
+            onMixFail: function (e) {},
+            onMixEnd: function (e) {
+                e.hasFailed ? a.style.display = "block" : a.style.display = "none"
+            }
+        }
+    });
+    
+    t.addEventListener("keyup", function () {
+    var a;
+    a = t.value.length < 2 ? "" : t.value.toLowerCase().trim(), clearTimeout(e), e = setTimeout(function () {
+        var e;
+        e = a, e ? i.filter('[class*="' + e + '"]') : i.filter("all")
+    }, 350)
+    })
+}
+    const NumberOfpages = parseInt(document.querySelector('[data-number-of-pages]').dataset.numberOfPages, 10),
+          searchContainer = document.querySelector('[ata-search-container]'),
+          alphabetContainer = document.querySelector('[data-alphabet-container]');
+    
+    function GetDate(url){
+       fetch(url).then(response => response.text()).then(text => {
+              alphabetContainer.innerHTML += text;
+              initialValue = initialValue + 1;
+              if(initialValue <= NumberOfpages){
+               url = window.location.href + '?view=brands-ajax&page=' + initialValue;
+               GetDate(url);
+              }
+              else {
+               apicalled();
+               searchContainer.style.opacity=1
+               return false;
+              }
+          }).catch(e => {
+            console.error(e);
+      });
+    } 
+  
+    var initialValue = 1,
+        url = window.location.href + '?view=brands-ajax&page=' + initialValue;
+        GetDate(url);
+    
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "t:sections.collection-by-brands.name",
+    "class": "collection-by-brands",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "t:sections.collection-by-brands.settings.title.label",
+        "default": "Our brands"
+      },
+      {
+        "type": "select",
+        "id": "heading_size",
+        "label": "t:common.heading_size.label",
+        "default": "h2",
+        "options": [
+          {
+            "value": "h3",
+            "label": "t:common.heading_size.options.small.label"
+          },
+          {
+            "value": "h2",
+            "label": "t:common.heading_size.options.medium.label"
+          },
+          {
+            "value": "h1",
+            "label": "t:common.heading_size.options.large.label"
+          },
+          {
+            "value": "h0",
+            "label": "t:common.heading_size.options.extra_large.label"
+          }
+        ]
+      },
+      {
+        "type": "select",
+        "id": "heading_position",
+        "label": "t:common.heading_position.label",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "t:common.heading_position.options.left.label"
+          },
+          {
+            "value": "center",
+            "label": "t:common.heading_position.options.center.label"
+          },
+          {
+            "value": "right",
+            "label": "t:common.heading_position.options.right.label"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "divider",
+        "label": "t:sections.collection-by-brands.settings.divider.label",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "group_cell",
+        "label": "t:sections.collection-by-brands.settings.group_cell.label",
+        "default": 1,
+        "min": 1,
+        "max": 6,
+        "step": 1,
+        "unit": "N"
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.collection-by-brands.presets.name"
+      }
+    ],
+    "enabled_on": {
+      "templates": ["page"]
+    }
+  }
+{% endschema %}
