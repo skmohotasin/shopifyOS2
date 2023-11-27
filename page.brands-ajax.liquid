@@ -1,0 +1,8 @@
+{% layout none %}
+{%- paginate collections by 1000 -%}  
+  {%- for collection in collections -%}
+    {%- if collection.all_products_count > 0  and collection.metafields.theme.brand_collection -%}
+      <div class="mix {{ collection.title | downcase | slice: 0 }} {{ collection.title | downcase | escape }}"><a href="{{ collection.url }}">{{ collection.title | escape }}</a></div>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endpaginate -%}
