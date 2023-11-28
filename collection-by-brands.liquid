@@ -2,55 +2,6 @@
 {%- capture alphabets -%}A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z{% endcapture %}
 {%- assign Arryalphabets = alphabets | split: "," -%}
 {%- style -%}
-.search-filter-brand-collection .search-container {
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: var(--sectionHeaderBottom) 0
-}
-.search-filter-brand-collection .input-field {
-  display: block;
-  width: 100%;
-  text-align: center
-}
-
-.search-filter-brand-collection #search-brands {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px
-}
-.search-filter-brand-collection .alphabets {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center
-}
-.search-filter-brand-collection button.filter {
-    padding: 10px 15px;
-    margin: 6px;
-    border: none;
-    outline: 0;
-    cursor: pointer;
-    background: #efefef
-}
-  
-.search-filter-brand-collection button.filter.mixitup-control-active,
-.search-filter-brand-collection button.filter:hover,
-.search-filter-brand-collection button.filter:focus {
-    background: var(--colorBtnATC);
-    color: #fff;
-    border: none
-}
-.search-filter-brand-collection .alphabet-container {
-  width: 100%;
-  margin: 60px auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  text-align: center
-}
 .search-filter-brand-collection .alphabet-container .mix {
   width: calc({{ 100 | divided_by: section.settings.group_cell | round: 2 | append: "%"}} - 20px);
   margin: 10px;
@@ -59,46 +10,129 @@
   box-shadow: 0 0 6px 0 #ccc;
   position: relative
 }
-.search-filter-brand-collection .alphabet-container .mix a {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  text-decoration: none;
-  color: #000;
-  font-size: 18px;
-  text-transform: uppercase
+.search-filter-brand-collection .loader::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    opacity:.7;
+    background-color:#fff
 }
-.search-filter-brand-collection #noItemsFoundMessage {
-  display: none;
-  width: 100%;
-  color: var(--colorBtnATC);
-}  
-  
-@media only screen and (max-width:768px) {  
-  .search-filter-brand-collection .alphabets {
-    margin: 0 -5px;
-    justify-content: space-between;
-  }
-  .search-filter-brand-collection button.filter {
-    margin: 5px;
-  }
-  .search-filter-brand-collection .alphabet-container .mix {
-    margin: 5px;
-    height: 40px;
-    line-height: 40px;
-    width: calc(50% - 10px);
-  }
-  .search-filter-brand-collection .alphabet-container {
-    margin: 20px -5px;
-    width: calc(100% + 10px);
-  }
-  .search-filter-brand-collection .alphabet-container .mix a {
-    font-size: 12px;
-  }
+.search-filter-brand-collection .loader-bar{
+    position:absolute;
+    top:50%;
+    height:5px;
+    width:12rem;
+    background-color:rgb(0 0 0);
+    border-radius:1em;
+    overflow:hidden
 }
-
+.search-filter-brand-collection .loader-bar::after{
+    position:absolute;
+    top:0;
+    left:0;
+    content:"";
+    width:50%;
+    height:100%;
+    background:linear-gradient(90deg,#fff5,rgba(230,230,230,.891));
+    animation:1.3s infinite loading-animation;
+    border-radius:1em
+}
+@keyframes loading-animation{
+    0%{
+        left:-50%
+    }
+    100%{
+        left:150%
+    }
+}
+.search-filter-brand-collection .search-container{
+    display:flex;
+    width:100%;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+    margin:var(--sectionHeaderBottom) 0;
+    position:relative
+}
+.search-filter-brand-collection .input-field{
+    display:block;
+    width:100%;
+    text-align:center
+}
+.search-filter-brand-collection #search-brands{
+    width:100%;
+    padding:10px;
+    margin-bottom:10px
+}
+.search-filter-brand-collection .alphabets{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center
+}
+.search-filter-brand-collection button.filter{
+    padding:10px 15px;
+    margin:6px;
+    border:none;
+    outline:0;
+    cursor:pointer;
+    background:#efefef
+}
+.search-filter-brand-collection button.filter.mixitup-control-active,.search-filter-brand-collection button.filter:focus,.search-filter-brand-collection button.filter:hover{
+    background:var(--colorBtnATC);
+    color:#fff;
+    border:none
+}
+.search-filter-brand-collection .alphabet-container{
+    width:100%;
+    margin:60px auto;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    text-align:center
+}
+.search-filter-brand-collection .alphabet-container .mix a{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    text-decoration:none;
+    color:#000;
+    font-size:18px;
+    text-transform:uppercase
+}
+.search-filter-brand-collection #noItemsFoundMessage{
+    display:none;
+    width:100%;
+    color:var(--colorBtnATC)
+}
+@media only screen and (max-width:768px){
+    .search-filter-brand-collection .alphabets{
+        margin:0 -5px;
+        justify-content:space-between
+    }
+    .search-filter-brand-collection button.filter{
+        margin:5px
+    }
+    .search-filter-brand-collection .alphabet-container .mix{
+        margin:5px;
+        height:40px;
+        line-height:40px;
+        width:calc(50% - 10px)
+    }
+    .search-filter-brand-collection .alphabet-container{
+        margin:20px -5px;
+        width:calc(100% + 10px)
+    }
+    .search-filter-brand-collection .alphabet-container .mix a{
+        font-size:12px
+    }
+}
+ 
 {%- endstyle -%}
 {%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
 <div class="page-width">
@@ -114,7 +148,8 @@
       data-number-of-pages="{{ NumberofPages }}"
     >
     <div class="search-filter-brand-collection">
-       <div class="search-container"  data-search-container>
+       <div class="search-container loader"  data-search-container>
+          <div class="loader-bar" data-loader-bar></div>
           <div class="input-field">
             <input type="text" class="input" data-input-search placeholder="Search Brands" id="search-brands">
           </div>
@@ -166,7 +201,8 @@ function apicalled(){
     })
 }
     const NumberOfpages = parseInt(document.querySelector('[data-number-of-pages]').dataset.numberOfPages, 10),
-          searchContainer = document.querySelector('[ata-search-container]'),
+          searchContainer = document.querySelector('[data-search-container]'),
+          loaderBar = document.querySelector('[data-loader-bar]'),
           alphabetContainer = document.querySelector('[data-alphabet-container]');
     
     function GetDate(url){
@@ -179,7 +215,8 @@ function apicalled(){
               }
               else {
                apicalled();
-               searchContainer.style.opacity=1
+               searchContainer.classList.remove("loader"); 
+               loaderBar.classList.remove("loader-bar");
                return false;
               }
           }).catch(e => {
